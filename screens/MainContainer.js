@@ -4,15 +4,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Screens
-import DetailsScreen from './DetailsScreen';
-import SettingsScreen from './SettingsScreen';
+import KitchenScreen from './KitchenScreen';
+import ProfileScreen from './ProfileScreen';
 import SchoolScreen from './SchoolScreen';
 import HealthScreen from './HealthScreen';
 import GymScreen from './GymScreen';
 
 //Screen names
-const detailsName = "Details";
-const settingsName = "Settings";
+const kitchenName = "Kitchen";
+const profileName = "Profile";
 const schoolName = "School";
 const healthName = "Health";
 const gymName = "Gym";
@@ -23,23 +23,25 @@ function MainContainer() {
   return (
     <NavigationContainer>
       <Tab.Navigator
+      // style the top nav bar that displays name of current tab
         initialRouteName={schoolName}
         screenOptions={({ route }) => ({
           headerStyle: {backgroundColor:'#E4CD05'},
           headerTintColor: 'white',
-          headerTitleStyle: { fontWeight: 'normal', textTransform: 'capitalize' },
+          headerTitleStyle: { fontWeight: 'normal', textTransform: 'uppercase', fontSize:30  },
           headerTitleAlign: 'center',
           headerShown: true,
           tabBarIcon: ({ focused, color, size }) => {
             
+            // switch icons based on whether the current tab is in focus
             let iconName;
             let rn = route.name;
 
-            if (rn === detailsName) {
-              iconName = focused ? 'list' : 'list-outline';
+            if (rn === kitchenName) {
+              iconName = focused ? 'restaurant' : 'restaurant-outline';
 
-            } else if (rn === settingsName) {
-              iconName = focused ? 'settings' : 'settings-outline';
+            } else if (rn === profileName) {
+              iconName = focused ? 'person-circle' : 'person-circle-outline';
             }
              
             else if (rn === schoolName) {
@@ -57,6 +59,7 @@ function MainContainer() {
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
+        // style the bottom tab bar
         tabBarOptions={{
           activeTintColor: '#E4CD05',
           inactiveTintColor: 'grey',
@@ -67,9 +70,9 @@ function MainContainer() {
 
         <Tab.Screen name={schoolName} component={SchoolScreen} />
         <Tab.Screen name={gymName} component={GymScreen} />
-        <Tab.Screen name={detailsName} component={DetailsScreen} />
+        <Tab.Screen name={kitchenName} component={KitchenScreen} />
         <Tab.Screen name={healthName} component={HealthScreen} />
-        <Tab.Screen name={settingsName} component={SettingsScreen} />
+        <Tab.Screen name={profileName} component={ProfileScreen} />
         
 
       </Tab.Navigator>
