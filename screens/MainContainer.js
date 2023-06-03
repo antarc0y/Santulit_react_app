@@ -4,14 +4,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Screens
-import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import SettingsScreen from './SettingsScreen';
+import SchoolScreen from './SchoolScreen';
+import HealthScreen from './HealthScreen';
+import GymScreen from './GymScreen';
 
 //Screen names
-const homeName = "Home";
 const detailsName = "Details";
 const settingsName = "Settings";
+const schoolName = "School";
+const healthName = "Health";
+const gymName = "Gym";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,36 +23,54 @@ function MainContainer() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName={homeName}
+        initialRouteName={schoolName}
         screenOptions={({ route }) => ({
+          headerStyle: {backgroundColor:'#E4CD05'},
+          headerTintColor: 'white',
+          headerTitleStyle: { fontWeight: 'normal', textTransform: 'capitalize' },
+          headerTitleAlign: 'center',
+          headerShown: true,
           tabBarIcon: ({ focused, color, size }) => {
+            
             let iconName;
             let rn = route.name;
 
-            if (rn === homeName) {
-              iconName = focused ? 'home' : 'home-outline';
-
-            } else if (rn === detailsName) {
+            if (rn === detailsName) {
               iconName = focused ? 'list' : 'list-outline';
 
             } else if (rn === settingsName) {
               iconName = focused ? 'settings' : 'settings-outline';
             }
+             
+            else if (rn === schoolName) {
+              iconName = focused ? 'home' : 'home-outline';
+            }
 
-            // You can return any component that you like here!
+            else if (rn === healthName) {
+              iconName = focused ? 'heart' : 'heart-outline';
+            }
+
+            else if (rn === gymName) {
+              iconName = focused ? 'bicycle' : 'bicycle-outline';
+            }
+
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'tomato',
+          activeTintColor: '#E4CD05',
           inactiveTintColor: 'grey',
-          labelStyle: { paddingBottom: 10, fontSize: 10 },
-          style: { padding: 10, height: 70}
+          labelStyle: { paddingBottom: 5, fontSize: 10 },
+          tabStyle: { justifyContent: 'center', alignItems: 'center' },
+          style: { padding: 5, height: 70, backgroundColor: 'yellow'}
         }}>
 
-        <Tab.Screen name={homeName} component={HomeScreen} />
+        <Tab.Screen name={schoolName} component={SchoolScreen} />
+        <Tab.Screen name={gymName} component={GymScreen} />
         <Tab.Screen name={detailsName} component={DetailsScreen} />
+        <Tab.Screen name={healthName} component={HealthScreen} />
         <Tab.Screen name={settingsName} component={SettingsScreen} />
+        
 
       </Tab.Navigator>
     </NavigationContainer>
